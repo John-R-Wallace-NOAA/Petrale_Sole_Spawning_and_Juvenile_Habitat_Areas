@@ -39,7 +39,7 @@ lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM',
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Pick the region used in VAST
-(Region <- c("Other", "California_current")[1])
+(Region <- c("Other", "California_current")[1]) # Only region  "Other" was found to work with this approach. See the VAST help for information on regions.
  
 
 # Use base::load()  to avoid my  JRWToolBox::load(), which loads twice.
@@ -47,11 +47,8 @@ lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM',
 # --------- CA Current Region -----------
 if(Region == "California_current")	{ 
     # 300 knots
-    # base::load("W:\\ALL_USR\\JRW\\R.Vanilla\\2017-12-28_Petrale_CW_NOCV_Winter_nx=300\\Image.Rdata")
-    # base::load("W:\\ALL_USR\\JRW\\R.Vanilla\\2018-01-03_Petrale_CW_NOCV_Winter_nx=300\\Image.Rdata")  # More restricted data
-    
-    base::load("W:/ALL_USR/JRW/Assessment/Petrale - Melissa/Org. Files Nov 2017, 2015 Data/2 - Run VAST Model/Petrale CW NOCV Biomass Regions n_x = 300/2018-01-05_Petrale_CW_NOCV_Winter_CA_Curr_nx=300/Image.RData")  # More restricted data
-	DateFile <- "W:/ALL_USR/JRW/Assessment/Petrale - Melissa/Org. Files Nov 2017, 2015 Data/2 - Run VAST Model/Petrale CW NOCV Biomass Regions n_x = 300/2018-01-05_Petrale_CW_NOCV_Winter_CA_Curr_nx=300/"
+    base::load("W:/ALL_USR/JRW/Assessment/Petrale - Melissa/Org. Files Nov 2017, 2015 Data/2 - Run VAST Model/Petrale CW NOCV Biomass n_x = 300/2018-01-05_Petrale_CW_NOCV_Winter_CA_Curr_nx=300/Image.RData")  # More restricted data
+    DateFile <- "W:/ALL_USR/JRW/Assessment/Petrale - Melissa/Org. Files Nov 2017, 2015 Data/2 - Run VAST Model/Petrale CW NOCV Biomass n_x = 300/2018-01-05_Petrale_CW_NOCV_Winter_CA_Curr_nx=300/"
 }
     
 # ----------- "Other" Region ---------
