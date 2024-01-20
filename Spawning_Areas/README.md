@@ -1,13 +1,11 @@
 
 Steps used:
 
-1)  Obtain the Petrale sole Winter Fishery logbook data by following the repo:
+1) The Petrale sole Winter Fishery logbook data contained in, 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData', was obtained by following this repo:
 
       https://github.com/John-R-Wallace-NOAA/PacFIN_Logbook_Download_and_Cleanup
 
-to obtain the 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData' data.
-
-2) Apply Thornson's VAST to the Petrale sole winter fishery logbook data, using the code in:
+2) Thornson's (VAST) [https://github.com/James-Thorson-NOAA/VAST] was applied to the data, using the code in:
 
        VAST Petrale CW NOCV Biomass n_x = 600.R
 
