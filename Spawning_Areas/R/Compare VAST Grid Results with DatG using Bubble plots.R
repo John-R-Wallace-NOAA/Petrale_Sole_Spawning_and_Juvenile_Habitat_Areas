@@ -65,8 +65,8 @@ cbind(Spatial_List$PolygonList$NN_Extrap$nn.idx, Spatial_List$PolygonList$NN_Ext
 
 # Run PlotResultsOnMap_Fn_JRW to save the underlying grid data
 
-# Petrale.Results.Dpth.Rst is now loaded below
-if(F) {
+# Create Petrale.Results.Dpth.Rst if needed
+if(TRUE) {
     # ******* MapDetails_List is not in Image.RData - it has to recreated here ********** !!
     MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( Region = Region, NN_Extrap = Spatial_List$PolygonList$NN_Extrap, Extrapolation_List = Extrapolation_List )
     
@@ -77,8 +77,8 @@ if(F) {
                                    Year_Set=Year_Set, Years2Include= 1981:2015 - 1980, Rotate=MapDetails_List[["Rotate"]], mar=c(0,0,2,0), oma=c(3.5,3.5,0,0), Cex=MapDetails_List[["Cex"]], 
                                    cex=1.8, Legend=MapDetails_List[["Legend"]], zone=MapDetails_List[["Zone"]], add = FALSE, mfrow = c(6, 6))
     gof()
-    
 }
+
 # Petrale.Results.Dpth.Rst.SAVE <- Petrale.Results.Dpth.Rst
 
 
