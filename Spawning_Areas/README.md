@@ -9,11 +9,11 @@ Steps used:
 
        VAST Petrale CW NOCV Biomass n_x = 600.R
 
-3) Compare the raw data (DatG) with VAST Grid results using Bubble plots:
+3) The raw data (DatG) was compared with VAST grid results using bubble plots:
 
        Compare VAST Grid Results with DatG using Bubble plots.R
 
-This code outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year.
+This code also outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year.
 
 4) The critera that is used to define the areas of interest and outputs the points and polygon results is in:
 
