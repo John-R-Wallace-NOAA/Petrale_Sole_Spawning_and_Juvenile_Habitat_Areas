@@ -5,7 +5,7 @@ Steps used:
 
       https://github.com/John-R-Wallace-NOAA/PacFIN_Logbook_Download_and_Cleanup
 
-2) Thornson's (VAST) [https://github.com/James-Thorson-NOAA/VAST] was applied to the data, using the code in:
+2) Thorson's [VAST](https://github.com/James-Thorson-NOAA/VAST]) was applied to the data, using the code in:
 
        VAST Petrale CW NOCV Biomass n_x = 600.R
 
