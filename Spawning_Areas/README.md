@@ -1,7 +1,7 @@
 
 Steps used:
 
-1) The Petrale sole Winter Fishery logbook data contained in, 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData', was obtained by following this repo:
+1) The Petrale sole Winter Fishery logbook data contained in, 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData', was obtained by followingan old version of this repo:
 
       https://github.com/John-R-Wallace-NOAA/PacFIN_Logbook_Download_and_Cleanup
 
