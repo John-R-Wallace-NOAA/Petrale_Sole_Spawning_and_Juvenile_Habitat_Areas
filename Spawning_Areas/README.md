@@ -19,3 +19,5 @@ This code outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a ha
 The eleven defined Petrale sole spawning areas are in (an R list of lists):
 
        Petrale AreaGroupsShare 11 Jan 2018.RData
+       
+Each spawning area has the areas points (AreasPts) from the VAST grid and the esitmated polygon that surrounds that area (Boundary).
