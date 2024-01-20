@@ -53,7 +53,7 @@ install.packages("https://github.com/James-Thorson-NOAA/FishStatsUtils/archive/r
 # VAST et al. copied from W:\MRO\MRO-3.4.2\library
 # lib(SpatialDeltaGLMM)
 
-# On Linux 
+# Try on Linux 
 # remotes::install_github('James-Thorson-NOAA/FishStatsUtils', ref = '437341d55a23241005c171b91b4cc104238080e7') 
 
 lib(maps) # Ver 3.3.0
@@ -67,7 +67,7 @@ lib(FishStatsUtils) # Ver 2.0.0
 
 
 
-base::load("2017-01-12_Petrale_CW_NOCV_Winter_nx=600\\Image_NO_Save_Object.Rdata")  # For this large file, void my JRWToolBox::load() which loads twice
+base::load("2017-01-12_Petrale_CW_NOCV_Winter_nx=600\\Image_NO_Save_Object.Rdata")  # For this large file, avoid my JRWToolBox::load() which loads twice
 
 source("Saves/ShowAreas.f.R")
 source("Saves/PlotMap_Fn_JRW.R")
