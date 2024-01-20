@@ -16,7 +16,7 @@ This code outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a ha
        Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R
 
    
-The eleven defined Petrale sole spawning areas are in (an R list of lists):
+The eleven defined Petrale sole spawning areas are in (an R list() of lists):
 
        Petrale AreaGroupsShare 11 Jan 2018.RData
        
