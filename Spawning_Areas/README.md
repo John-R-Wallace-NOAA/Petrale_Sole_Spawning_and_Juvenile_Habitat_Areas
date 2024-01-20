@@ -15,7 +15,7 @@ Steps used:
 
 This code also outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year.
 
-4) The selected critera define areas (within 'Petrale.Results.Biomass.Stacked.Dpth.Rst') of interest and the points and polygon results are output:
+4) The selected criteria define areas (within 'Petrale.Results.Biomass.Stacked.Dpth.Rst') of interest and the points and polygon results are output:
 
        Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R
 
