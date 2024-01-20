@@ -15,13 +15,13 @@ Steps used:
 
 This code also outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year.
 
-4) The critera that is used to define the areas of interest and outputs the points and polygon results is in:
+4) The code which uses the critera to define the areas of interest and which outputs the points and polygon results is in:
 
        Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R
 
    
-The eleven defined Petrale sole spawning areas are in (an R list() of lists):
+The eleven defined Petrale sole spawning areas (an R list() of lists) are in this sub-repo here:
 
-       Petrale AreaGroupsShare 11 Jan 2018.RData
+       Polygon_Area_Results > Petrale AreaGroupsShare 11 Jan 2018.RData
        
-Each spawning area has the areas points (AreasPts) from the VAST grid and the esitmated polygon that surrounds that area (Boundary).
+Each spawning area has the areas points (AreasPts) from the VAST grid and the estimated polygon that surrounds that area (Boundary).
