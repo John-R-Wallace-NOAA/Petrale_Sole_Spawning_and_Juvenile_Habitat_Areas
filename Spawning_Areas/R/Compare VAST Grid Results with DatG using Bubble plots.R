@@ -1,9 +1,40 @@
 
+
+###################################################################################
+###         Using:                                                                                                                                                                                   ###
+###                R 3.5.1                                                                                                                                                                           ###
+###                FishStatsUtils ver 2.0.0      (A Jim Thorson'spackage on GitHub that is used with VAST .)                  ###
+###                Imap built under R 4.3.1 (manually copied  from R 4.3.1 library folder to  R 3.5.1 library folder)    ###
+###################################################################################
+
+#  R package achive: https://cran.r-project.org/src/contrib/Archive
+# install.packages("https://cran.r-project.org/src/contrib/Archive/remotes/remotes_2.1.0.tar.gz", repos = NULL)
+
+
+setwd("Petrale Spatial Results") # Change all paths as needed
+
+if (!any(installed.packages()[, 1] %in% "JRWToolBox")) {
+       if (!any(installed.packages()[, 1] %in% "remotes"))  install.packages('remotes') 
+       remotes::install_github("John-R-Wallace-NOAA/JRWToolBox")
+}
+
+library(remotes)
+library(JRWToolBox)
+
+
+install.packages("https://cran.r-project.org/src/contrib/Archive/maps/maps_3.3.0.tar.gz", repos = NULL) 
+install_version('lattice', '0.20-41', repos = "http://cran.us.r-project.org")
+install_version('mapdata', '2.3.0', repos = "http://cran.us.r-project.org")
+install_version('sp', '1.4-2', repos = "http://cran.us.r-project.org")
+install_version('maptools', '0.9-9', repos = "http://cran.us.r-project.org")
+
+
+
 Source("PlotMap_Fn_JRW.R")
 Source("PlotResultsOnMap_Fn_JRW.R")
 
-lib('James-Thorson/VAST', q=F)
-lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM', q = F)
+lib('James-Thorson/VAST', q = FALSE)
+lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM', q = FALSE)
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
