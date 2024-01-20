@@ -1,6 +1,23 @@
 
 lib(INLA)
+lib()
+lib(polyclip)
+lib(geosphere)
 
+
+movePolygon <- function(xy, col = "blue", alpha = 0.5, lty = 1, colBg = 'white', ...) {
+    polygon(xy$x, xy$y, col = NA, lty = lty, ...)
+    while(length(PtRow <- identify(xy, labels = "", n = 1)) == 1) {
+       newPt <- locator(1)
+       polygon(xy$x, xy$y, lty = lty, col = NA, border = colBg, ...)
+           xy[PtRow,] <- newPt
+       polygon(xy$x, xy$y, col = NA, lty = lty, ...)
+    }
+    polygon(xy$x, xy$y, col = col.alpha(col, alpha), lty = lty, ...)
+    invisible(xy)
+}
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
 
 AreaGroup <- list()
 AreaGroup$One <- list()
@@ -97,15 +114,11 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
 
 
 
-
-
 # --------- Step #1 --------
 
-   # Type <- "Circle"  # -99 for both resolution and convex implies circle
-   # Type <- "Ellipse"
-   Type <- "Poly"
-
-   windows() 
+   Type <- c("Circle", "Ellipse", "Poly")[3]   # -99 for both resolution and convex implies circle
+  
+   dev.new() 
    par(mfrow =c(2,2))
    
    
@@ -162,7 +175,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
 
 # End Step #1
 
-    # ------ Step #2 -----------
+# ------ Step #2 -----------
 
     AreaGroup[[G]]$Resolution <- 78
     AreaGroup[[G]]$Convex <- -0.1
@@ -176,7 +189,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
    	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
    
    
-	 switch( Type, 
+	 switch(Type, 
 	   Circle = { Petrale.Spawning.Area.Polygons[[Top.Areas.80.by.Year.at.Least.40prct.of.Years.Sub$Sub.Area[N]]] <- circle.f(AREA[1,1], AREA[1,2], r = j, yaxis = T, facets.num = 40)
                   print(gdistMeasure(units='km'))   }, 
 	   
@@ -188,7 +201,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
 	    
          DATA.inla.boundary <- inla.nonconvex.hull(as.matrix( AREA[,-3]), convex = AreaGroup[[G]]$Convex, concave =  -0.40, res = AreaGroup[[G]]$Resolution )$loc
          DATA.inla.boundary <- rbind(DATA.inla.boundary, DATA.inla.boundary[1,])   #Close the polygon
-         DATA.inla.boundary <- movePolygon(data.frame(x = DATA.inla.boundary[,1], y = DATA.inla.boundary[,2]), col='purple')
+         DATA.inla.boundary <- movePolygon(data.frame(x = DATA.inla.boundary[,1], y = DATA.inla.boundary[,2]), col = 'purple')
          AreaGroup[[G]]$Boundary <- DATA.inla.boundary
 
 	   })
@@ -199,7 +212,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
 
 
 # Re-adjust shape of existing polygon
-G
+G  # Check Group
 gof()
 AREA <- AreaGroup[[G]]$AreasPts
 Delta <- 0.04
@@ -213,9 +226,7 @@ gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')
 
 	
 # Enlarge or shrink polygon
-lib(polyclip)
-
-G 
+G # Check Group
 AREA <- AreaGroup[[G]]$AreasPts
 
 Poly.New <- AreaGroup[[G]]$Boundary
@@ -223,7 +234,7 @@ Delta <- 0.04
 plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
    	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
 polygon(AreaGroup[[G]]$Boundary, col= col.alpha('purple', 0.25))				
-Poly.New <- data.frame(movePolygon(polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.014)[[1]]))
+Poly.New <- data.frame(movePolygon(polyclip::polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.014)[[1]]))
 
 gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')		
 
@@ -241,7 +252,7 @@ save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 X_XXPM.dmp") #
 
 
 # Look at polygons
-windows() 
+dev.new() 
 par(mfrow =c(2,2))
 
 for (G in 1:11) {
@@ -320,7 +331,7 @@ aggregate(List(PropBiomass), List(Year), sum)
 
 dir.create(Dir, recursive =T)
 png(paste0(Dir, "BioWtByYearAndGroup.png"), width = 800, height = 800, bg = 'grey')
-# windows()
+# dev.new()
 xyplot(BiomassWeightedTotOverAreaWithinYear ~ Year | ordered(Group, c("One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven")), data = Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, 
                   ylab = "Biomass (mt) Weighted Total", as.table=T, type='o')				
 
@@ -331,7 +342,7 @@ xyplot(BiomassWeightedTotOverAreaWithinYear ~ Year | ordered(Group, c("One","Two
   
 
 png(paste0(Dir, "PropBioByYearAndGroup.png"), width = 800, height = 800, bg = 'grey')
-# windows()
+# dev.new()
 xyplot(PropBiomass ~ Year | ordered(Group, c("One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven")), data = Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, 
                   ylab = "Proportion Biomass (sums to one over groups within years)", as.table=T, type='o')
 gof()
@@ -344,9 +355,7 @@ save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file='Petrale.Spawn
 
 # ----------------  Create metadata -------------------------
 
-lib(geosphere)
-
-# areaPolygon(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0)))/(1852*60*1852*60)  # 0.9968515  Test to check output is in square meters
+# geosphere::areaPolygon(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0)))/(1852*60*1852*60)  # 0.9968515  Test to check output is in square meters
 
 (Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta <- data.frame(Group = names(AreaGroup), centroidLon = NA, centroidLat = NA, Area.h = NA, minLat = NA, maxLat = NA))
 
@@ -355,7 +364,7 @@ for( i in Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group)  {
    
    Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$centroidLon[Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group %in% i] <- centroid(AreaGroup[[i]]$Boundary)[1]
    Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$centroidLat[Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group %in% i] <- centroid(AreaGroup[[i]]$Boundary)[2]
-   Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Area.h[Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group %in% i] <- areaPolygon(AreaGroup[[i]]$Boundary)/100^2  # Sq meters converted to hectares 
+   Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Area.h[Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group %in% i] <- geosphere::areaPolygon(AreaGroup[[i]]$Boundary)/100^2  # Sq meters converted to hectares 
    Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$minLat[Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group%in% i] <- min(AreaGroup[[i]]$Boundary[,2])
    Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$maxLat[Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$Group %in% i] <- max(AreaGroup[[i]]$Boundary[,2])
 }
