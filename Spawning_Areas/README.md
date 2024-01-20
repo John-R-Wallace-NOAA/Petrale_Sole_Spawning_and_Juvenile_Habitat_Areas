@@ -5,7 +5,7 @@ Steps used:
 
       https://github.com/John-R-Wallace-NOAA/PacFIN_Logbook_Download_and_Cleanup
 
-to oabtain the 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData' data.
+to obtain the 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData' data.
 
 2) Apply Thornson's VAST to the Petrale sole winter fishery logbook data, using the code in:
 
