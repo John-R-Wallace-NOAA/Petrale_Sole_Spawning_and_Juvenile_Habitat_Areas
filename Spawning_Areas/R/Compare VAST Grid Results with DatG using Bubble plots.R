@@ -13,6 +13,12 @@
 
 setwd("Petrale Spatial Results") # Change all paths as needed
 
+install.packages("https://cran.r-project.org/src/contrib/Archive/maps/maps_3.3.0.tar.gz", repos = NULL) 
+install_version('lattice', '0.20-41', repos = "http://cran.us.r-project.org")
+install_version('mapdata', '2.3.0', repos = "http://cran.us.r-project.org")
+install_version('sp', '1.4-2', repos = "http://cran.us.r-project.org")
+install_version('maptools', '0.9-9', repos = "http://cran.us.r-project.org")
+
 if (!any(installed.packages()[, 1] %in% "JRWToolBox")) {
        if (!any(installed.packages()[, 1] %in% "remotes"))  install.packages('remotes') 
        remotes::install_github("John-R-Wallace-NOAA/JRWToolBox")
@@ -21,20 +27,13 @@ if (!any(installed.packages()[, 1] %in% "JRWToolBox")) {
 library(remotes)
 library(JRWToolBox)
 
-
-install.packages("https://cran.r-project.org/src/contrib/Archive/maps/maps_3.3.0.tar.gz", repos = NULL) 
-install_version('lattice', '0.20-41', repos = "http://cran.us.r-project.org")
-install_version('mapdata', '2.3.0', repos = "http://cran.us.r-project.org")
-install_version('sp', '1.4-2', repos = "http://cran.us.r-project.org")
-install_version('maptools', '0.9-9', repos = "http://cran.us.r-project.org")
-
-
-
-Source("PlotMap_Fn_JRW.R")
-Source("PlotResultsOnMap_Fn_JRW.R")
-
+lib("John-R-Wallace-NOAA/Imap")
 lib('James-Thorson/VAST', q = FALSE)
 lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM', q = FALSE)
+
+Source("PlotMap_Fn_JRW.R") # In the same GitHub folder as this R script
+Source("PlotResultsOnMap_Fn_JRW.R") # In the same GitHub folder as this R script
+
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -759,18 +758,4 @@ fitted.contour(BathySmall.list)
 
          
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  
