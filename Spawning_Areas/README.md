@@ -26,7 +26,7 @@ The eleven defined Petrale sole spawning areas (an R list() of lists) are in thi
        
 Each spawning area within the list has the areas points (AreasPts) from the VAST grid and the estimated polygon that surrounds that area (Boundary).
 
-The code that plots these areas in various ways starts around line 411 of 'Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R'. A snippet of code that plots those areas in a simple way is:
+The code that plots these areas in various ways starts around line 411 of 'Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R'. For convenience, a snippet of code that plots those areas in a simple way is given below:
 
 
      load('Petrale AreaGroupsShare 11 Jan 2018.RData')
