@@ -70,7 +70,6 @@ if(Region == "Other")	  {
 # Years2Include = which( Year_Set %in% sort(unique(DatG$RYEAR)))
 
 
-
 str(Spatial_List$PolygonList$NN_Extrap)
 List of 2
 #  $ nn.idx  : int [1:45628, 1] 21 21 21 21 21 21 21 21 21 21 ...
