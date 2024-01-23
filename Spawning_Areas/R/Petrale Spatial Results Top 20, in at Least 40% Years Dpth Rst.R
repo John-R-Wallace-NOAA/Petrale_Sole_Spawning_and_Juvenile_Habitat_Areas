@@ -246,7 +246,7 @@ gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')
 
 # When finished with enlarging	
 AreaGroup[[G]]$Boundary <- Poly.New
-save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 X_XXPM.dmp") # 
+save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 X_XXPM.RData") # 
 
 
 
@@ -264,7 +264,8 @@ for (G in 1:11) {
 }	
 
 
-AreaGroup.OLD -> AreaGroup
+# Reorder the groups
+AreaGroup.OLD <- AreaGroup
 AreaGroup$Four <- AreaGroup.OLD$Ten
 AreaGroup$Five <- AreaGroup.OLD$Eleven
 AreaGroup$Six <- AreaGroup.OLD$Four
@@ -288,8 +289,8 @@ c(AreaGroup[[10]]$Boundary[1,2], names(AreaGroup)[10])
 c(AreaGroup[[11]]$Boundary[1,2], names(AreaGroup)[11])
 
 
-save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 4_48PM.dmp")
-load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\R\\Petrale AreaGroup 10 Jan 2018 4_48PM.dmp")
+save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 4_48PM.RData")
+load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\R\\Petrale AreaGroup 10 Jan 2018 4_48PM.RData")
 	
 
 # ======================== Biomass Proportion by Area within Year ====================================
@@ -347,11 +348,13 @@ xyplot(PropBiomass ~ Year | ordered(Group, c("One","Two","Three","Four","Five","
                   ylab = "Proportion Biomass (sums to one over groups within years)", as.table=T, type='o')
 gof()
 
-
-save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file='Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst 16 Jan 2018.dmp')
-     
-
-
+ 
+# --------- Density --------- 
+# Would need to do an average weighted biomass within year in: Petrale.Spawning.Groups.PropBiomass.by.Year.Dpth.Rst - below is old version
+# Petrale.Spawning.Areas.Prop.by.Year.Meta$Kg.per.Hectare <- Petrale.Spawning.Areas.Prop.by.Year.Meta$Biomass*1000/Petrale.Spawning.Areas.Prop.by.Year.Meta$Area.h
+	
+#  Some missing code here....    
+save(Petrale.Spawning.Groups.PropBiomass.by.Year.Dpth.Rst, file = 'Petrale.Spawning.Groups.PropBiomass.by.Year.Dpth.Rst.RData')
 
 # ----------------  Create metadata -------------------------
 
@@ -386,17 +389,11 @@ CA OR WA
  3  5  3 
 
 	
-# Need to keep meta data table seperate from AreaGroup list
+# Need to keep metadata table separate from AreaGroup list
 
-	 
-# --------- Density --------- 
-# Would need to do an average weighted biomass within year in: Petrale.Spawning.Groups.Prop.by.Year.Dpth.Rst - below is old version
-# Petrale.Spawning.Areas.Prop.by.Year.Meta$Kg.per.Hectare <- Petrale.Spawning.Areas.Prop.by.Year.Meta$Biomass*1000/Petrale.Spawning.Areas.Prop.by.Year.Meta$Area.h
 	
-save(Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta, file = 'Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta 11 Jan 2019.dmp')
-
-
-# --------------------- Saves for Melissa (saves from above)----------------------------
+    
+# --------------------- Saves for Melissa ----------------------------
 
 # Create Area Group list to share
 
@@ -410,25 +407,48 @@ for (i in 1:11) {
 
 AreaGroupsShare$One <- list(AreasPts = AreaGroupsShare$One$AreasPts, Boundary = AreaGroupsShare$One$Boundary)
 
-# Push out the polgon figures to png
 
+# Push out the polgon figures to png on a 2 X 2 grid
 Dir <- "Figs/Top 80P in at least 40P Years, Region = Other/"
 png(paste0(Dir, "Polygons%03d.png"), width = 800, height = 800, bg = 'grey')
 par(mfrow =c(2,2))
 
 for (G in 1:11) {
-   AREA <- AreaGroupsShare[[G]]$AreasPts
+   AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
    Delta <- 0.04
-   plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+   plot( AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
                main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
    polygon(AreaGroupsShare[[G]]$Boundary, col=col.alpha('purple', 0.25))
 }	
 gof()
 
 
-save(AreaGroupsShare, file = "Petrale AreaGroupsShare 11 Jan 2018.dmp")
-save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file='Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst 16 Jan 2018.dmp')
-save(Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta, file = 'Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta 11 Jan 2019.dmp')
+# Use the Imap package to see the polygons next to the local coastline with a browser window
+for (G in 1:11) {
+   AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
+   Delta <- 0.25
+   JRWToolBox::browserPlot('
+     Imap::imap(list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
+          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", col.alpha("purple", 0.25)), zoom = FALSE)
+     points(AREA, cex = 0.5)
+   ')
+}	
+
+
+# If the NOAA's National Centers for Environmental Information is serving up the NOAA's U.S. Coastal Relief Model for the contiguous U.S correctly (has been spotty as of Jan 2024) then using Imap::plotRAST() will show the bathymetry of the ocean floor
+for (G in 11) {    # Just try one area to start
+   AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
+   Delta <- 0.25
+   JRWToolBox::browserPlot('
+     Imap::plotRAST(AREA, list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
+          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), col.poly = c("grey40", col.alpha("purple", 0.65)))
+   ')
+}	
+
+
+save(AreaGroupsShare, file = "Petrale AreaGroupsShare 11 Jan 2018.RData")
+save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file='Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst 16 Jan 2018.RData')
+save(Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta, file = 'Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta 11 Jan 2018.RData')
 
 # ----------------------------------------------------------------------------------
 
