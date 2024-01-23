@@ -1,6 +1,6 @@
 
 lib(INLA)
-lib()
+lib(Imap)
 lib(polyclip)
 lib(geosphere)
 
