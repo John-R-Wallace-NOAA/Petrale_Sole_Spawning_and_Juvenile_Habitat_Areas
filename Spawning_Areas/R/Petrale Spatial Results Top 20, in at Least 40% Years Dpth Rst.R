@@ -73,7 +73,6 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
 (AreaGroup$Six$AreasPts <- selectPts(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.Rst$Year %in% 1981 & Petrale.Quant.Biomass.Stacked.Dpth.Rst$Area %in% AreaGroup$Six$Areas, c("X", "Y", "Area")]))
  
 
-
 # Group 7
  G <- 7
 (AreaGroup$Seven$Areas <- unique(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.Rst$Y < 41.0 & Petrale.Quant.Biomass.Stacked.Dpth.Rst$Y > 40.6 & 
@@ -165,7 +164,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
    	                ellipse(mean(AREA$X), mean(AREA$Y), j, k, col='black', theta = atan((AREA$Y[1] - AREA$Y[length(AREA$Y)])/(AREA$X[1] - AREA$X[length(AREA$X)])), figureAdj = FALSE) }, 
    	   
    	     Poly = { DATA.inla.boundary <- inla.nonconvex.hull(as.matrix( AREA[,-3]), convex = AreaGroup[[G]]$Convex, concave =  -0.40, res = AreaGroup[[G]]$Resolution )$loc
-                  DATA.inla.boundary <- rbind(DATA.inla.boundary, DATA.inla.boundary[1,])   #Close the polygon
+                  DATA.inla.boundary <- rbind(DATA.inla.boundary, DATA.inla.boundary[1,])   # Close the polygon
                   lines(DATA.inla.boundary, col='purple', type = 'o')
 				  # lines(DATA.inla.boundary, col='purple')
    	     })
@@ -173,7 +172,6 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
       }
   }
 
-# End Step #1
 
 # ------ Step #2 -----------
 
@@ -198,58 +196,53 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
  					col='black', theta = atan((AREA$Y[1] - AREA$Y[length(AREA$Y)])/(AREA$X[1] - AREA$X[length(AREA$X)])), figureAdj = FALSE) }, 
 	   
 	   Poly = { 
-	    
          DATA.inla.boundary <- inla.nonconvex.hull(as.matrix( AREA[,-3]), convex = AreaGroup[[G]]$Convex, concave =  -0.40, res = AreaGroup[[G]]$Resolution )$loc
          DATA.inla.boundary <- rbind(DATA.inla.boundary, DATA.inla.boundary[1,])   #Close the polygon
-         DATA.inla.boundary <- movePolygon(data.frame(x = DATA.inla.boundary[,1], y = DATA.inla.boundary[,2]), col = 'purple')
+         DATA.inla.boundary <- Imap::adjustPolygon(data.frame(x = DATA.inla.boundary[,1], y = DATA.inla.boundary[,2]), col = 'purple')
          AreaGroup[[G]]$Boundary <- DATA.inla.boundary
 
 	   })
      
    gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')	
     
-# End Step #2   
 
-
-# Re-adjust shape of existing polygon
-G  # Check Group
-gof()
-AREA <- AreaGroup[[G]]$AreasPts
-Delta <- 0.04
-plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
-            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
-AreaGroup[[G]]$Boundary <- movePolygon(AreaGroup[[G]]$Boundary, col='purple')
-	
-gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')	
-	
-	
+# Step #3    Re-adjust shape of existing polygon
+   G  # Check Group
+   gof()
+   AREA <- AreaGroup[[G]]$AreasPts
+   Delta <- 0.04
+   plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+               main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
+   AreaGroup[[G]]$Boundary <- Imap::adjustPolygon(AreaGroup[[G]]$Boundary, col='purple')
+   	
+   gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')	
 
 	
-# Enlarge or shrink polygon
-G # Check Group
-AREA <- AreaGroup[[G]]$AreasPts
+# Step #4   Enlarge or shrink polygon
+   G # Check Group
+   AREA <- AreaGroup[[G]]$AreasPts
+   
+   Poly.New <- AreaGroup[[G]]$Boundary
+   Delta <- 0.04
+   plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+      	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
+   polygon(AreaGroup[[G]]$Boundary, col= col.alpha('purple', 0.25))				
+   Poly.New <- data.frame(Imap::adjustPolygon(polyclip::polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.014)[[1]]))
+   
+   gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')	
+	
 
-Poly.New <- AreaGroup[[G]]$Boundary
-Delta <- 0.04
-plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
-   	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
-polygon(AreaGroup[[G]]$Boundary, col= col.alpha('purple', 0.25))				
-Poly.New <- data.frame(movePolygon(polyclip::polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.014)[[1]]))
+# Step #5   Final look for Enlarge or shrink polygon
+   plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+      	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
+   polygon(Poly.New, col= col.alpha('purple', 0.25))			
+   gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')		
+   
 
-gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')		
-
-# Final look for Enlarge or shrink polygon
-plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
-   	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
-polygon(Poly.New, col= col.alpha('purple', 0.25))			
-gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')		
-
-# When finished with enlarging	
-AreaGroup[[G]]$Boundary <- Poly.New
-save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 X_XXPM.RData") # 
-
-
-
+# Step #6   Save when finished with enlarging	
+   AreaGroup[[G]]$Boundary <- Poly.New
+  
+  
 
 # Look at polygons
 dev.new() 
@@ -289,7 +282,7 @@ c(AreaGroup[[10]]$Boundary[1,2], names(AreaGroup)[10])
 c(AreaGroup[[11]]$Boundary[1,2], names(AreaGroup)[11])
 
 
-save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 4_48PM.RData")
+save(AreaGroup, file = "Petrale AreaGroup 10 Jan 2018 4_48PM.RData")  # Intermittent  save so that work above is not lost
 load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\R\\Petrale AreaGroup 10 Jan 2018 4_48PM.RData")
 	
 
@@ -345,18 +338,20 @@ xyplot(BiomassWeightedTotOverAreaWithinYear ~ Year | ordered(Group, c("One","Two
 png(paste0(Dir, "PropBioByYearAndGroup.png"), width = 800, height = 800, bg = 'grey')
 # dev.new()
 xyplot(PropBiomass ~ Year | ordered(Group, c("One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven")), data = Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, 
-                  ylab = "Proportion Biomass (sums to one over groups within years)", as.table=T, type='o')
-gof()
+                  ylab = "Proportion Biomass (sums to one over groups within years)", as.table = TRUE, type = 'o')
+
 
  
 # --------- Density --------- 
 # Would need to do an average weighted biomass within year in: Petrale.Spawning.Groups.PropBiomass.by.Year.Dpth.Rst - below is old version
 # Petrale.Spawning.Areas.Prop.by.Year.Meta$Kg.per.Hectare <- Petrale.Spawning.Areas.Prop.by.Year.Meta$Biomass*1000/Petrale.Spawning.Areas.Prop.by.Year.Meta$Area.h
 	
-#  Some missing code here....    
+#  Some missing code here it seems .... , but the average weighted biomass within year was done:
 save(Petrale.Spawning.Groups.PropBiomass.by.Year.Dpth.Rst, file = 'Petrale.Spawning.Groups.PropBiomass.by.Year.Dpth.Rst.RData')
 
-# ----------------  Create metadata -------------------------
+
+
+# ----------------  Create metadata information for each polygon -------------------------
 
 # geosphere::areaPolygon(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0)))/(1852*60*1852*60)  # 0.9968515  Test to check output is in square meters
 
@@ -377,7 +372,7 @@ Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta
 
 
 
-# ------------- Polygons in Areas -------------------	
+# ------------- Polygons by State -------------------	
 	 
 Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$centroidInState <- 'WA'
 Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$centroidInState[ Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta$centroidLat < 46 + 16/60] <- 'OR'
@@ -408,7 +403,7 @@ for (i in 1:11) {
 AreaGroupsShare$One <- list(AreasPts = AreaGroupsShare$One$AreasPts, Boundary = AreaGroupsShare$One$Boundary)
 
 
-# Push out the polgon figures to png on a 2 X 2 grid
+# Push out the polgon figures on a 2 X 2 grid out to png
 Dir <- "Figs/Top 80P in at least 40P Years, Region = Other/"
 png(paste0(Dir, "Polygons%03d.png"), width = 800, height = 800, bg = 'grey')
 par(mfrow =c(2,2))
@@ -420,26 +415,52 @@ for (G in 1:11) {
                main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
    polygon(AreaGroupsShare[[G]]$Boundary, col=col.alpha('purple', 0.25))
 }	
-gof()
+dev.off()
 
 
 # Use the Imap package to see the polygons next to the local coastline with a browser window
-for (G in 1:11) {
+# optOld <- options(browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
+optOld <- options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
+for (G in 8) {
    AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
    Delta <- 0.25
-   JRWToolBox::browserPlot('
+   JRWToolBox::browsePlot('
      Imap::imap(list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
-          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", col.alpha("purple", 0.25)), zoom = FALSE)
+          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", col.alpha("purple", 0.25)), zoom = FALSE,)
      points(AREA, cex = 0.5)
    ')
 }	
+options(optOld)
+
+
+# Note that the use of the 'file' argument in JRWToolBox::browsePlot() to save the figure with that file name 
+# If your browser option is set to Chrome (or MS Edge) and opens several tabs each with the text in between each space then upgrade Chrome 
+#          (https://support.google.com/chrome/thread/76204149/bug-chrome-can-t-open-local-files-with-spaces-in-their-path?hl=en)
+# Another option is ensure the entire path to your figures does not contain any spaces.
+
+# options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
+# options(browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
+# options(browser = "C:/Program Files/Mozilla Firefox/firefox.exe") 
+
+# A 'NULL' browser option will use a photo viewer (at least for me)  but it's not tabbed like a browser
+optOld <- options(browser = NULL)
+for (G in 6) {
+   AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
+   Delta <- 0.25
+   JRWToolBox::browsePlot('
+     Imap::imap(list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
+          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", col.alpha("purple", 0.25)), zoom = FALSE,)
+     points(AREA, cex = 0.5)
+   ', file = paste0("Petrale Spawning Area ", G, ".png"))
+}	
+options(optOld)
 
 
 # If the NOAA's National Centers for Environmental Information is serving up the NOAA's U.S. Coastal Relief Model for the contiguous U.S correctly (has been spotty as of Jan 2024) then using Imap::plotRAST() will show the bathymetry of the ocean floor
 for (G in 11) {    # Just try one area to start
    AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
    Delta <- 0.25
-   JRWToolBox::browserPlot('
+   JRWToolBox::browsePlot('
      Imap::plotRAST(AREA, list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
           latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), col.poly = c("grey40", col.alpha("purple", 0.65)))
    ')
@@ -447,7 +468,7 @@ for (G in 11) {    # Just try one area to start
 
 
 save(AreaGroupsShare, file = "Petrale AreaGroupsShare 11 Jan 2018.RData")
-save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file='Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst 16 Jan 2018.RData')
+save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file = 'Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst 16 Jan 2018.RData')
 save(Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta, file = 'Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta 11 Jan 2018.RData')
 
 # ----------------------------------------------------------------------------------
