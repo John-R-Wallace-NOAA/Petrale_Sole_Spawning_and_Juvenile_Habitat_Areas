@@ -7,7 +7,7 @@ Steps used:
 
 2) Thorson's [VAST](https://github.com/James-Thorson-NOAA/VAST]) was applied to the data, using the code in:
 
-       VAST Petrale CW NOCV Biomass n_x = 600.R
+       VAST Petrale CW NOCV Biomass Other Regions n_x = 300.R
 
 3) The raw data (DatG) was compared with VAST grid results using bubble plots:
 
@@ -25,3 +25,20 @@ The eleven defined Petrale sole spawning areas (an R list() of lists) are in thi
        Polygon_Area_Results > Petrale AreaGroupsShare 11 Jan 2018.RData
        
 Each spawning area within the list has the areas points (AreasPts) from the VAST grid and the estimated polygon that surrounds that area (Boundary).
+
+The code that plots these areas in various ways starts around line 411 of 'Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R'. A snippet of code that plots those areas in a simple way is:
+
+
+     load('Petrale AreaGroupsShare 11 Jan 2018.RData')
+     
+     par(mfrow =c(2,2))
+     
+     for (G in 1:11) {
+        AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
+        Delta <- 0.04
+        plot( AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+                    main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
+        polygon(AreaGroupsShare[[G]]$Boundary, col=col.alpha('purple', 0.25))
+     }	
+
+     
