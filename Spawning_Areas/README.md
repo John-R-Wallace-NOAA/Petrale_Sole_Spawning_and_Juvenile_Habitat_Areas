@@ -19,8 +19,9 @@ This code also outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is
 
        Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R
 
+The [INLA](www.r-inla.org) R package's inla.nonconvex.hull() function was first used to find a nonconvex hull for the points. The polyclip() function from the polyoffset package was then used to shift the boundary outwards as needed and the adjustPolygon() function from my [Imap](https://github.com/John-R-Wallace-NOAA/Imap) package was used to move the polygon if needed.  The area was calculated with geosphere() from the areaPolygon package.
    
-The eleven defined Petrale sole spawning areas (an R list() of lists) are in this sub-repo here:
+The eleven defined Petrale sole spawning areas (an R list() of lists) are in this repo here:
 
        Polygon_Area_Results > Petrale AreaGroupsShare 11 Jan 2018.RData
        
