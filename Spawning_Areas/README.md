@@ -40,5 +40,8 @@ The code that plots these areas in various ways starts around line 411 of 'Petra
                     main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
         polygon(AreaGroupsShare[[G]]$Boundary, col=col.alpha('purple', 0.25))
      }	
+     # 
+
+        
 
      
