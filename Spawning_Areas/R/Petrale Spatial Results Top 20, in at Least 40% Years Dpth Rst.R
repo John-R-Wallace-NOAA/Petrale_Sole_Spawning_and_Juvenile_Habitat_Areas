@@ -257,7 +257,7 @@ for (G in 1:11) {
 }	
 
 
-# Reorder the groups
+# Reorder the groups from North to South
 AreaGroup.OLD <- AreaGroup
 AreaGroup$Four <- AreaGroup.OLD$Ten
 AreaGroup$Five <- AreaGroup.OLD$Eleven
@@ -418,33 +418,8 @@ for (G in 1:11) {
 dev.off()
 
 
-# Use the Imap package to see the polygons next to the local coastline with a browser window
-# optOld <- options(browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
-optOld <- options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
-for (G in 8) {
-   AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
-   Delta <- 0.25
-   JRWToolBox::browsePlot('
-     Imap::imap(list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
-          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", col.alpha("purple", 0.25)), zoom = FALSE,)
-     points(AREA, cex = 0.5)
-   ')
-}	
-options(optOld)
-
-
 # Note that the use of the 'file' argument in JRWToolBox::browsePlot() to save the figure with that file name 
-# If your browser option is set to Chrome (or MS Edge) and opens several tabs each with the text in between each space then upgrade Chrome 
-#          (https://support.google.com/chrome/thread/76204149/bug-chrome-can-t-open-local-files-with-spaces-in-their-path?hl=en)
-# Another option is ensure the entire path to your figures does not contain any spaces.
-
-# options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
-# options(browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
-# options(browser = "C:/Program Files/Mozilla Firefox/firefox.exe") 
-
-# A 'NULL' browser option will use a photo viewer (at least for me)  but it's not tabbed like a browser
-optOld <- options(browser = NULL)
-for (G in 6) {
+for (G in 1:11) {
    AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
    Delta <- 0.25
    JRWToolBox::browsePlot('
@@ -453,7 +428,6 @@ for (G in 6) {
      points(AREA, cex = 0.5)
    ', file = paste0("Petrale Spawning Area ", G, ".png"))
 }	
-options(optOld)
 
 
 # If the NOAA's National Centers for Environmental Information is serving up the NOAA's U.S. Coastal Relief Model for the contiguous U.S correctly (has been spotty as of Jan 2024) then using Imap::plotRAST() will show the bathymetry of the ocean floor
@@ -471,19 +445,7 @@ save(AreaGroupsShare, file = "Petrale AreaGroupsShare 11 Jan 2018.RData")
 save(Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst, file = 'Petrale.Spawning.Groups.Prop.Area.Within.Year.Dpth.Rst 16 Jan 2018.RData')
 save(Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta, file = 'Petrale.Spawning.Area.Polygons.Dpth.Rst.Meta 11 Jan 2018.RData')
 
-# ----------------------------------------------------------------------------------
+# ---------------------------- End ------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-	
 
