@@ -5,18 +5,6 @@ lib(polyclip)
 lib(geosphere)
 
 
-movePolygon <- function(xy, col = "blue", alpha = 0.5, lty = 1, colBg = 'white', ...) {
-    polygon(xy$x, xy$y, col = NA, lty = lty, ...)
-    while(length(PtRow <- identify(xy, labels = "", n = 1)) == 1) {
-       newPt <- locator(1)
-       polygon(xy$x, xy$y, lty = lty, col = NA, border = colBg, ...)
-           xy[PtRow,] <- newPt
-       polygon(xy$x, xy$y, col = NA, lty = lty, ...)
-    }
-    polygon(xy$x, xy$y, col = col.alpha(col, alpha), lty = lty, ...)
-    invisible(xy)
-}
-
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
 AreaGroup <- list()
@@ -226,7 +214,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
    Delta <- 0.04
    plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
       	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
-   polygon(AreaGroup[[G]]$Boundary, col= col.alpha('purple', 0.25))				
+   polygon(AreaGroup[[G]]$Boundary, col = Imap::col.alpha('purple', 0.25))				
    Poly.New <- data.frame(Imap::adjustPolygon(polyclip::polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.014)[[1]]))
    
    gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')	
@@ -235,7 +223,7 @@ plot(Petrale.Quant.Biomass.Stacked.Dpth.Rst[Petrale.Quant.Biomass.Stacked.Dpth.R
 # Step #5   Final look for Enlarge or shrink polygon
    plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
       	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
-   polygon(Poly.New, col= col.alpha('purple', 0.25))			
+   polygon(Poly.New, col = Imap::col.alpha('purple', 0.25))			
    gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')		
    
 
@@ -253,7 +241,7 @@ for (G in 1:11) {
    Delta <- 0.04
    plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
                main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
-   polygon(AreaGroup[[G]]$Boundary, col=col.alpha('purple', 0.25))
+   polygon(AreaGroup[[G]]$Boundary, col = Imap::col.alpha('purple', 0.25))
 }	
 
 
@@ -413,7 +401,7 @@ for (G in 1:11) {
    Delta <- 0.04
    plot( AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
                main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
-   polygon(AreaGroupsShare[[G]]$Boundary, col=col.alpha('purple', 0.25))
+   polygon(AreaGroupsShare[[G]]$Boundary, col = Imap::col.alpha('purple', 0.25))
 }	
 dev.off()
 
@@ -424,7 +412,7 @@ for (G in 1:11) {
    Delta <- 0.25
    JRWToolBox::browsePlot('
      Imap::imap(list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
-          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", col.alpha("purple", 0.25)), zoom = FALSE,)
+          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), poly = c("grey40", Imap::col.alpha("purple", 0.25)), zoom = FALSE,)
      points(AREA, cex = 0.5)
    ', file = paste0("Petrale Spawning Area ", G, ".png"))
 }	
@@ -436,7 +424,7 @@ for (G in 11) {    # Just try one area to start
    Delta <- 0.25
    JRWToolBox::browsePlot('
      Imap::plotRAST(AREA, list(world.h.land, AreaGroupsShare[[G]]$Boundary), longrange = c(min(AREA$X) - Delta * 2.5, max(AREA$X) + Delta * 3.5),
-          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), col.poly = c("grey40", col.alpha("purple", 0.65)))
+          latrange = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), col.poly = c("grey40", Imap::col.alpha("purple", 0.65)))
    ')
 }	
 
