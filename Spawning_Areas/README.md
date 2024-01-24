@@ -38,7 +38,7 @@ The code that plots these areas in various ways starts around line 406 of 'Petra
      for (G in 1:11) {
         AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
         Delta <- 0.04
-        plot( AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+        plot(AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
                     main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
         polygon(AreaGroupsShare[[G]]$Boundary, col=col.alpha('purple', 0.25))
      }	
@@ -54,7 +54,7 @@ Below is an example of using polyclip::polyoffset() to reduce the size of a poly
      for (G in 9) {
          AREA <- AreaGroupsShare[[G]]$AreasPts[,-3]
          Delta <- 0.04
-         plot( AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
+         plot(AREA, xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(min(AREA$Y) - Delta, max(AREA$Y) + Delta), 
                      main = paste("Res =", AreaGroupsShare[[G]]$Resolution, "Convex =", AreaGroupsShare[[G]]$Convex ))
          polygon(AreaGroupsShare[[G]]$Boundary, col = Imap::col.alpha('purple', 0.25))
          polygon(polyclip::polyoffset(list(x=AreaGroupsShare[[G]]$Boundary$x[-1], 
