@@ -2,8 +2,8 @@
 base::load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\Org. Files Nov 2017, 2015 Data\\4 - Run VAST on WCGBTS\\Less than or equal to 18 cm\\2018-03-29_PTRL_CW_DV_WCGBTS_Other_V4_AS_nx=600\\Image.RData")
 
 # Load latest AreaGroup save file
-# load("W:\\ALL_USR\\JRW\\R.Vanilla\\Petrale WCGBTS AreaGroup 03 Apr 2018 3_21PM.dmp")
-load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\Org. Files Nov 2017, 2015 Data\\4 - Run VAST on WCGBTS\\Petrale WCGBTS AreaGroup 05 Apr 2018 3_25PM.dmp")
+# load("W:\\ALL_USR\\JRW\\R.Vanilla\\Petrale WCGBTS AreaGroup 03 Apr 2018 3_21PM.RData")
+load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\Org. Files Nov 2017, 2015 Data\\4 - Run VAST on WCGBTS\\Petrale WCGBTS AreaGroup 05 Apr 2018 3_25PM.RData")
 
 (CONTOUR <- c(T, F)[1])
 (POLYGONS <- c(T, F)[1])
@@ -188,7 +188,7 @@ G <- 10
 	    
          DATA.inla.boundary <- inla.nonconvex.hull(as.matrix( AREA[,-3]), convex = AreaGroup[[G]]$Convex, concave =  -0.40, res = AreaGroup[[G]]$Resolution )$loc
          DATA.inla.boundary <- rbind(DATA.inla.boundary, DATA.inla.boundary[1,])   #Close the polygon
-         DATA.inla.boundary <- movePolygon(data.frame(x = DATA.inla.boundary[,1], y = DATA.inla.boundary[,2]))
+         DATA.inla.boundary <- adjustPolygon(data.frame(x = DATA.inla.boundary[,1], y = DATA.inla.boundary[,2]))
          AreaGroup[[G]]$Boundary <- DATA.inla.boundary
 
 	   })
@@ -207,14 +207,14 @@ plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(mi
             main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
 # Or plotGIS(...)	
 #  polygon(AreaGroup[[G]]$Boundary	, col= col.alpha('purple', 0.25)) # Look only 
-AreaGroup[[G]]$Boundary <- movePolygon(AreaGroup[[G]]$Boundary)  # Look and move
+AreaGroup[[G]]$Boundary <- adjustPolygon(AreaGroup[[G]]$Boundary)  # Look and move
 	
 gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')	
 
 
 # plotGIS(...)
 Poly.New <- AreaGroup[[G]]$Boundary	
-Poly.New <- movePolygon(Poly.New)
+Poly.New <- adjustPolygon(Poly.New)
 
 	
 # Enlarge or shrink polygon
@@ -230,7 +230,7 @@ plot( AREA[,-3], xlim = c(min(AREA$X) - Delta, max(AREA$X) + Delta), ylim = c(mi
    	            main = paste("Res =", AreaGroup[[G]]$Resolution, "Convex =", AreaGroup[[G]]$Convex ))
 				
 polygon(AreaGroup[[G]]$Boundary, col= col.alpha('purple', 0.25))				
-Poly.New <- data.frame(movePolygon(polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.007)[[1]]))
+Poly.New <- data.frame(adjustPolygon(polyoffset(list(x=Poly.New$x[-1], y=Poly.New$y[-1]), -0.007)[[1]]))
 
 gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')		
 
@@ -245,7 +245,7 @@ gdistMeasure(units='km'); gdistMeasure(units='km'); gdistMeasure(units='km')
 # When finished with enlarging	
 # Need to save often 
 AreaGroup[[G]]$Boundary <- Poly.New
-save(AreaGroup, file = "Petrale WCGBTS AreaGroup 05 Apr 2018 3_25PM.dmp") 
+save(AreaGroup, file = "Petrale WCGBTS AreaGroup 05 Apr 2018 3_25PM.RData") 
 
 
 # ==========================================================================================================================

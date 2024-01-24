@@ -14,8 +14,8 @@ if(F) {
     
     (Petrale.BD.NWFSC.2017 <- match.f( Petrale.BD.NWFSC.2017, Petrale.Catch.NWFSC.2017, "KEY", "KEY", c("Area_Swept_ha")))[1:4,]
     
-    save(Petrale.BD.NWFSC.2017, Petrale.Catch.NWFSC.2017, file = 'W:/ALL_USR/JRW/Assessment/Petrale - Melissa/R/Petrale.BD.Catch.NWFSC.2017.dmp')
-    load("W:/ALL_USR/JRW/Assessment/Petrale - Melissa/R/Petrale.BD.Catch.NWFSC.2017.dmp")
+    save(Petrale.BD.NWFSC.2017, Petrale.Catch.NWFSC.2017, file = 'W:/ALL_USR/JRW/Assessment/Petrale - Melissa/R/Petrale.BD.Catch.NWFSC.2017.RData')
+    load("W:/ALL_USR/JRW/Assessment/Petrale - Melissa/R/Petrale.BD.Catch.NWFSC.2017.RData")
 }
 
 
@@ -107,10 +107,10 @@ HomeDir <- getwd()
 
 # Load Data
 if(.Platform$OS.type == "windows") {
-   load("W:/ALL_USR/JRW/Assessment/Petrale - Melissa/R/Petrale.BD.Catch.NWFSC.2017.dmp")
+   load("W:/ALL_USR/JRW/Assessment/Petrale - Melissa/R/Petrale.BD.Catch.NWFSC.2017.RData")
 } else {
     options(width = 150) # Linux
-    load("/more_home/h_jwallace/Petrale CW NOCV Biomass Regions n_x = 300/Petrale.BD.Catch.NWFSC.2017.dmp") 
+    load("/more_home/h_jwallace/Petrale CW NOCV Biomass Regions n_x = 300/Petrale.BD.Catch.NWFSC.2017.RData") 
 	# options(repos=c(CRAN="http://cran.fhcrc.org", CRANextra = "http://www.stats.ox.ac.uk/pub/RWin")) # Change to CRAN repository away from the Revolution Analytics frozen mirror.
 	# update.packages(ask=F)
 }
@@ -137,8 +137,8 @@ Petrale.BD.NWFSC.2017[is.na(Petrale.BD.NWFSC.2017$WeightCalc_kg),]
 
 # Deal with bad weights - have to save and load to make this non-interactive ****** 21 entries, all in 2015, where only the sex is given *******
 # badWts <- identify(Petrale.BD.NWFSC.2017$Weight_kg, Petrale.BD.NWFSC.2017$WeightCalc_kg)
-# save(badWts, file = "badWts Petrale.dmp")
-load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\R\\badWts Petrale.dmp")
+# save(badWts, file = "badWts Petrale.RData")
+load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\R\\badWts Petrale.RData")
 Petrale.BD.NWFSC.2017$Weight_kg[badWts] <- Petrale.BD.NWFSC.2017$WeightCalc_kg[badWts]
 
 # Use calculated wts where the normal weight is missing

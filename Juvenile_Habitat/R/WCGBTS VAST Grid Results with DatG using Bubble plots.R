@@ -106,7 +106,7 @@ histogram(~Petrale.Results.Biomass.Stacked.Dpth$CPUE.kgPerh | factor(Petrale.Res
 dev.new()
 histogram(~log(Petrale.Results.Biomass.Stacked.Dpth$CPUE.kgPerh) | factor(Petrale.Results.Biomass.Stacked.Dpth$Year), type = 'count') # Logged
 
-# save(Petrale.Results.Biomass.Stacked.Dpth, file = "Petrale.Results.Biomass.Stacked.Dpth.dmp")
+# save(Petrale.Results.Biomass.Stacked.Dpth, file = "Petrale.Results.Biomass.Stacked.Dpth.RData")
 
 
 
@@ -131,7 +131,7 @@ for( i in 4:(ncol(Petrale.Results.Dpth.Area) - 1)) {
 sum(is.na(Petrale.Quant.Biomass.Dpth)) # No NA's now with using "round. = T, digits = 7"
 Petrale.Quant.Biomass.Dpth[1:4,]
 
-# save(Petrale.Quant.Biomass.Dpth, file = "Petrale.Quant.Biomass.Dpth.dmp")
+# save(Petrale.Quant.Biomass.Dpth, file = "Petrale.Quant.Biomass.Dpth.RData")
 
 
 # Stack the quants
@@ -149,7 +149,7 @@ for ( i in 5:(ncol(Petrale.Quant.Biomass.Dpth))) {
 Petrale.Quant.Biomass.Stacked.Dpth <- renum(Petrale.Quant.Biomass.Stacked.Dpth)
 sum(is.na(Petrale.Quant.Biomass.Stacked.Dpth)) # 0
 
-# save(Petrale.Quant.Biomass.Stacked.Dpth, file="Petrale.Quant.Biomass.Stacked.Dpth.dmp")  
+# save(Petrale.Quant.Biomass.Stacked.Dpth, file="Petrale.Quant.Biomass.Stacked.Dpth.RData")  
 
   
 # Find areas that are in the top 95% in 100% of the years: Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth 
@@ -166,7 +166,7 @@ dim(Table(tmp2$Area, tmp2$Year))
 
 Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth
 length(Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth)
-# save(Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth, file= "Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth.dmp")
+# save(Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth, file= "Top.Areas.80.by.Year.at.Least.40prct.of.Years.Dpth.RData")
 
     
 # ======================= Plot against Raw Data in DatG!!!!!!!!!!!!!!!!!!!!!!!!!!! =====================================
@@ -209,7 +209,7 @@ Col = colorRampPalette(colors = c("darkblue", "blue",  "orange", "red"))
 (PLOTLOWAREAS <- c(T, F)[2])
 
 if(POLYGONS & !exists('AreaGroup'))
-  load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\Org. Files Nov 2017, 2015 Data\\4 - Run VAST on WCGBTS\\Petrale WCGBTS AreaGroup 05 Apr 2018 3_25PM.dmp")
+  load("W:\\ALL_USR\\JRW\\Assessment\\Petrale - Melissa\\Org. Files Nov 2017, 2015 Data\\4 - Run VAST on WCGBTS\\Petrale WCGBTS AreaGroup 05 Apr 2018 3_25PM.RData")
 
 
 if(.Platform$OS.type == "windows" & PNG) {
