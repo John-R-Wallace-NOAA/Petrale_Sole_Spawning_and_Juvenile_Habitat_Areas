@@ -26,7 +26,7 @@ The eleven defined Petrale sole spawning areas (an R list() of lists) are in thi
 
        Polygon_Area_Results > Petrale AreaGroupsShare 11 Jan 2018.RData
        
-Each spawning area within the list has the areas points (AreasPts) from the VAST grid and the estimated polygon that surrounds that area (Boundary).
+Each spawning area within the list has the areas points (AreasPts) from the VAST grid and the estimated polygon that surrounds that area (Boundary). Select figures are available for viewing in the 'Figues' folder.
 
 The code that plots these areas in various ways starts around line 406 of 'Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R'. For convenience, a snippet of code that plots those areas in a simple way is given below:
 
@@ -61,4 +61,7 @@ Below is an example of using polyclip::polyoffset() to reduce the size of a poly
                y=AreaGroupsShare[[G]]$Boundary$y[-1]), -0.014)[[1]], col = Imap::col.alpha('green', 0.25))
       }	
       
- 
+
+
+
+
