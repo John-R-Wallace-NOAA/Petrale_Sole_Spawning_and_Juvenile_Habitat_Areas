@@ -9,7 +9,7 @@ Finding juvenile Petrale sole areas using VAST on the WCGTBS for years 2003-15:
     d.	Petrale sole less than or equal to 18 cm was determined to have enough survey data to identify presence in coastal areas, but not too old to have spread along the entire coast.<br>
     e.	Length and weight information within WCGTBS was used to find the proportion of Petrale sole’s total weight within a tow that is less than or equal to the length specified.<br>
     f.	When only a length was available, the specimen weight was estimated, by sex, from the length-weight relationships in the 2015 Petrale sole stock assessment (Ref).<br> 
-    g.	The length-weight relationship was also used to QA/QC the specimen weight information.<br>
+    g.	The length-weight relationship was also used to QA/QC the specimen weight information.<br><br> 
 
 2.	VAST<br> 
 a.	An extrapolation grid based on the data, not a region ( i.e. Region = ‘Other’ not e.g. Region = ‘California Current’) was used.<br> 
@@ -21,7 +21,7 @@ f.	After running VAST, good diagnostics were observed, e.g. a good Q-Q plot<br>
 g.	Consistent high areas of CPUE over years were then identified.<br>
 h.	These areas (groups of the extrapolation grid points) were created by VAST to have similar spatial characteristics. <br>
 i.	A subjective decision was made on how high of CPUE within a year and how consistent over years achieved the goal of a judiciously large number of areas, some of which juvenile Petrale sole may not have. utilized in certain years, or potentially, they were not found in that area by the random blocked designed WCGBTS survey.<br>
-j.	The decision was that the CPUE of an area needed to be in the top 15% within a year for at least 3 of the 13 years (2003-2015).<br>
+j.	The decision was that the CPUE of an area needed to be in the top 15% within a year for at least 3 of the 13 years (2003-2015).<br><br> 
 
 
 3.	Polygons<br> 
