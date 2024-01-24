@@ -3,7 +3,7 @@
 ###################################################################################
 ###         Using:                                                                                                                                                                                   ###
 ###                R 3.5.1                                                                                                                                                                           ###
-###                FishStatsUtils ver 2.0.0      (A Jim Thorson'spackage on GitHub that is used with VAST .)                  ###
+###                FishStatsUtils ver 2.0.0      (A Jim Thorson's package on GitHub that is used with VAST .)                  ###
 ###                Imap built under R 4.3.1 (manually copied  from R 4.3.1 library folder to  R 3.5.1 library folder)    ###
 ###################################################################################
 
@@ -13,22 +13,25 @@
 
 setwd("Petrale Spatial Results") # Change all paths as needed
 
-install.packages("https://cran.r-project.org/src/contrib/Archive/maps/maps_3.3.0.tar.gz", repos = NULL) 
-install_version('lattice', '0.20-41', repos = "http://cran.us.r-project.org")
-install_version('mapdata', '2.3.0', repos = "http://cran.us.r-project.org")
-install_version('sp', '1.4-2', repos = "http://cran.us.r-project.org")
-install_version('maptools', '0.9-9', repos = "http://cran.us.r-project.org")
 
 if (!any(installed.packages()[, 1] %in% "JRWToolBox")) {
        if (!any(installed.packages()[, 1] %in% "remotes"))  install.packages('remotes') 
        remotes::install_github("John-R-Wallace-NOAA/JRWToolBox")
 }
 
-library(remotes)
 library(JRWToolBox)
+lib(remotes) # JRWToolBox::lib() will both install (only when needed) and load the package. 
+lib("John-R-Wallace-NOAA/Imap") 
+
+# Not all of these tar ball installs (which need compiling) are working for me with Windows  R ver 3.5.1, hence *** ONLY MY LEGACY COMPLIED VERSIONS HAVE ALLOWED ME TO MAKE THIS WORK ***
+install.packages("https://cran.r-project.org/src/contrib/Archive/maps/maps_3.3.0.tar.gz", repos = NULL) 
+remotes::install_version('lattice', '0.20-41', repos = "http://cran.us.r-project.org")
+remotes::install_version('mapdata', '2.3.0', repos = "http://cran.us.r-project.org")
+remotes::install_version('sp', '1.4-2', repos = "http://cran.us.r-project.org")
+remotes::install_version('maptools', '0.9-9', repos = "http://cran.us.r-project.org")
+
 
 lib("John-R-Wallace-NOAA/Imap")
-lib('James-Thorson/VAST', q = FALSE)
 lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM', q = FALSE)
 
 Source("PlotMap_Fn_JRW.R") # In the same GitHub folder as this R script
