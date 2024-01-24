@@ -1,20 +1,58 @@
 
+###################################################################################
+###         Using:                                                                                                                                                                                   ###
+###                R 3.5.1                                                                                                                                                                           ###
+###                FishStatsUtils ver 2.0.0      (A Jim Thorson's package on GitHub that is used with VAST .)                  ###
+###                Imap built under R 4.3.1 (manually copied  from R 4.3.1 library folder to  R 3.5.1 library folder)    ###
+###################################################################################
 
-# devtools::install_github("John-R-Wallace/R-ToolBox")
-require(JRWToolBox)
+#  R package achive: https://cran.r-project.org/src/contrib/Archive
+
+
+setwd("Petrale Spatial Results") # Change all paths as needed
+
+if (!any(installed.packages()[, 1] %in% "JRWToolBox")) {
+       if (!any(installed.packages()[, 1] %in% "remotes"))  install.packages('remotes') 
+       remotes::install_github("John-R-Wallace-NOAA/JRWToolBox")
+}
+
+library(JRWToolBox)
+lib(remotes) # JRWToolBox::lib() will both install (only when needed) and load the package. 
+lib("John-R-Wallace-NOAA/Imap") 
+
+# Not all of these tar ball installs (which need compiling) are working for me with Windows  R ver 3.5.1, hence *** ONLY MY LEGACY COMPLIED VERSIONS HAVE ALLOWED ME TO MAKE THIS WORK ***
+# (I do have the version of Rtools needed for R ver 3.5.1 installed)
+# install.packages("https://cran.r-project.org/src/contrib/Archive/remotes/remotes_2.1.0.tar.gz", repos = NULL)
+install.packages("https://cran.r-project.org/src/contrib/Archive/maps/maps_3.3.0.tar.gz", repos = NULL) 
+install_version('lattice', '0.20-41', repos = "http://cran.us.r-project.org")
+install_version('mapdata', '2.3.0', repos = "http://cran.us.r-project.org")
+install_version('sp', '1.4-2', repos = "http://cran.us.r-project.org")
+install_version('maptools', '0.9-9', repos = "http://cran.us.r-project.org")
+# install.packages("https://cran.r-project.org/src/contrib/Archive/RandomFieldsUtils/RandomFieldsUtils_1.2.5.tar.gz", repos = NULL)
+install.packages("https://cran.r-project.org/src/contrib/Archive/RandomFields/RandomFields_3.3.14.tar.gz", repos = NULL)
+install.packages("https://github.com/James-Thorson-NOAA/FishStatsUtils/archive/refs/tags/2.0.0.tar.gz", repos = NULL) # FishStatsUtils 2.0.0
+
+#  INLA (no recent attempt in R ver 3.5.1)
+install.packages("BiocManager"))
+BiocManager::install())
+BiocManager::install(c("graph", "Rgraphviz")))
+install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE))
+INLA:::inla.dynload.workaround()  # INLA fix on some older Linux system
+
+# TMB (no recent attempt in R ver 3.5.1)
 lib(numDeriv)
 lib(TMB)
-# devtools::install_github("kaskr/TMB_contrib_R/TMBhelper")
-lib(TMBhelper)
-lib(devtools)
-# devtools::install_github("james-thorson/Utilities")  
-lib(ThorsonUtilities)
-# devtools::install_github("james-thorson/VAST") 
-lib(VAST)
-# devtools::install_github("kaskr/TMB_contrib_R/TMBhelper")
-INLA:::inla.dynload.workaround()  # INLA fix on some older Linux system
+# remotes::install_github("kaskr/TMB_contrib_R/TMBhelper")
 lib(TMBhelper)
 
+# VAST  (no recent attempt in R ver 3.5.1, except for SpatialDeltaGLMM)
+lib('nwfsc-assess/geostatistical_delta-GLMM', Package.Name = 'SpatialDeltaGLMM', q = FALSE)
+# remotes::install_github("james-thorson/Utilities")  
+lib(ThorsonUtilities)
+remotes::install_github('james-thorson-NOAA/VAST', ref = 'c2c43293421f4f2f257ecd4033211ab289553357') # VAST
+
+
+# ---------------------------------------------------------------------------------------------------------------
 
 Region <- c("California_current", "Other")[2]
 
