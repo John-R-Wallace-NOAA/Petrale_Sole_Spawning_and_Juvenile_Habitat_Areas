@@ -20,7 +20,7 @@ This code uses the 'PlotResultsOnMap_Fn_JRW' function (in this repo) which is a 
 
        Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R
 
-In a multi-step iterative process the [INLA](www.r-inla.org) R package's inla.nonconvex.hull() function was first used to find a nonconvex hull for the points. The polyclip() function from the 'polyoffset' package was then employed to reduce the size of the polygons, and the adjustPolygon() function from my [Imap](https://github.com/John-R-Wallace-NOAA/Imap) package was utilized to move the polygon if needed.  The area was calculated with geosphere() from the 'areaPolygon' package.
+In a multi-step iterative process the [INLA](www.r-inla.org) R package's inla.nonconvex.hull() function was first used to find a nonconvex hull for the points. The polyclip() function from the 'polyoffset' package was then employed to reduce the size of the polygons to achieve a snug fit, and the adjustPolygon() function from my [Imap](https://github.com/John-R-Wallace-NOAA/Imap) package was utilized to move the polygons if needed.  The area was calculated with geosphere() from the 'areaPolygon' package.
 <br><br><br>
 The eleven defined Petrale sole spawning areas (an R list() of lists) are in this repo here:
 
