@@ -5,16 +5,14 @@ Steps used (see the Spawning_Areas folder for additional details):
 1\. Thorson's [VAST](https://github.com/James-Thorson-NOAA/VAST]) (consider using [sdmTMB](https://pbs-assess.github.io/sdmTMB/) for new projects) was applied to the data using the code in:
 
        VAST Petrale CW DV Biomass Other Region.R
-<br>
-2. The raw data was compared for consistence with the VAST grid results using bubble plots and areas with the highest catch of small Petrale sole were found using:
+<br><br>
+2\. The raw data was compared for consistence with the VAST grid results using bubble plots and areas with the highest catch of small Petrale sole were found using:
 
        WCGBTS VAST Grid Results with DatG using Bubble plots.R
-
-<br>
-3. Polygons surrounding the top areas were subsequently constructed:
+<br><br>
+3\. Polygons surrounding the top areas were subsequently constructed:
 
        Petrale WCGBTS Top 15% in 3 of 13 years.R
-
 <br>
 
 Additional information on finding juvenile Petrale sole areas using VAST on the WCGTBS for years 2003-2015:
