@@ -1,26 +1,26 @@
 
 Steps used:
 
-1) The Petrale sole Winter Fishery logbook data, 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData', was obtained by following (an old version of) this repo:
+1\. The Petrale sole Winter Fishery logbook data, 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData', was obtained by following (an old version of) this repo:
 
       https://github.com/John-R-Wallace-NOAA/PacFIN_Logbook_Download_and_Cleanup
-
-2) Thorson's [VAST](https://github.com/James-Thorson-NOAA/VAST]) (consider using [sdmTMB](https://pbs-assess.github.io/sdmTMB/) for new projects) was applied to the data using the code in:
+<br><br>
+2\. Thorson's [VAST](https://github.com/James-Thorson-NOAA/VAST]) (consider using [sdmTMB](https://pbs-assess.github.io/sdmTMB/) for new projects) was applied to the data using the code in:
 
        VAST Petrale CW NOCV Biomass Other Regions n_x = 300.R
+<br><br>
+3\. The raw data (DatG) was compared with VAST grid results using bubble plots and areas with the highest catch in the Petrale Winter Fishery were found:
 
-3) The raw data (DatG) was compared with VAST grid results using bubble plots:
+       Find VAST Areas with Highest Petrale Winter Fishing Catch.R
 
-       Compare VAST Grid Results with DatG using Bubble plots.R
-
-This code also outputs the plotted data using 'PlotResultsOnMap_Fn_JRW' which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year.
-
-4) The selected criteria define areas (within 'Petrale.Results.Biomass.Stacked.Dpth.Rst') of interest and the points and polygon results are output:
+This code uses the 'PlotResultsOnMap_Fn_JRW' function (in this repo) which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year. From that data the VAST areas that are in the top 20% in at least 40% of the years were established.
+<br><br><br>
+4\. Polygons surrounding the top areas were subsequently constructed:
 
        Petrale Spatial Results Top 20, in at Least 40% Years Dpth Rst.R
 
 In a multi-step iterative process the [INLA](www.r-inla.org) R package's inla.nonconvex.hull() function was first used to find a nonconvex hull for the points. The polyclip() function from the 'polyoffset' package was then employed to reduce the size of the polygons, and the adjustPolygon() function from my [Imap](https://github.com/John-R-Wallace-NOAA/Imap) package was utilized to move the polygon if needed.  The area was calculated with geosphere() from the 'areaPolygon' package.
-   
+<br><br><br>
 The eleven defined Petrale sole spawning areas (an R list() of lists) are in this repo here:
 
        Polygon_Area_Results > Petrale AreaGroupsShare 11 Jan 2018.RData
