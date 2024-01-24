@@ -4,7 +4,7 @@ Steps used:
 1\. The Petrale sole Winter Fishery logbook data, 'LB.ShortForm.No.Hake.Strat 13 Apr 2017.RData', was obtained by following (an old version of) this repo:
 
       https://github.com/John-R-Wallace-NOAA/PacFIN_Logbook_Download_and_Cleanup
-<br>
+<br><br>
 2\. Thorson's [VAST](https://github.com/James-Thorson-NOAA/VAST]) (consider using [sdmTMB](https://pbs-assess.github.io/sdmTMB/) for new projects) was applied to the data using the code in:
 
        VAST Petrale CW NOCV Biomass Other Regions n_x = 300.R
