@@ -14,7 +14,7 @@ As of Jan 2024, not all of the tar ball installs (which need compiling) are work
 
        Find VAST Areas with Highest Petrale Winter Fishing Catch.R
 
-This code uses the 'PlotResultsOnMap_Fn_JRW' function (in this repo) which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year. From that data the VAST areas that are in the top 20% in at least 40% of the years were established. Examples of VAST areas selected around the vertices of the INLA tessellation grid can be seen in this [folder](https://github.com/John-R-Wallace-NOAA/Length_Restricted_Catch_with_VAST/tree/master/VAST_Region_Method_Comparison_using_Small_Dover/2018-07-03_DOVR_WCGBTS_LM17_v4_1_0_AS_nx%3D600%20-%20Region%20%3D%20Other/Figs/All%20Areas%2C%20Random%20Col%2C%20Top%2015per%20in%206_13%20Years) within my Length_Restricted_Catch_with_VAST repo.
+This code uses the 'PlotResultsOnMap_Fn_JRW' function (in this repo) which is a hacked version of Thorson's 'PlotResultsOnMap' function. 'Petrale.Results.Biomass.Stacked.Dpth.Rst' is that output row stacked [rbind()] by year. From that data the VAST areas that are in the top 20% in at least 40% of the years were established. Examples of VAST areas selected around the vertices of the INLA tessellation grid can be seen in this [folder](https://github.com/John-R-Wallace-NOAA/Length_Restricted_Catch_with_VAST/tree/master/VAST_Region_Method_Comparison_using_Small_Dover/2018-07-03_DOVR_WCGBTS_LM17_v4_1_0_AS_nx%3D600%20-%20Region%20%3D%20Other/Figs/All%20Areas%2C%20Random%20Col%2C%20Top%2015per%20in%206_13%20Years) within my 'Length_Restricted_Catch_with_VAST' repo.
 <br><br><br>
 4\. Polygons surrounding the top areas were subsequently constructed:
 
