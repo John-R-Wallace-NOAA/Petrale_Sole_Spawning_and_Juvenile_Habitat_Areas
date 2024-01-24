@@ -1,4 +1,4 @@
-Also see [Length_Restricted_Catch_with_VAST](https://github.com/John-R-Wallace-NOAA/Length_Restricted_Catch_with_VAST)
+Also see my repo: [Length_Restricted_Catch_with_VAST](https://github.com/John-R-Wallace-NOAA/Length_Restricted_Catch_with_VAST) <br> <br>
 
 Steps used (see the Spawning_Areas folder for additional details):
 
@@ -20,7 +20,7 @@ Steps used (see the Spawning_Areas folder for additional details):
 Additional information on finding juvenile Petrale sole areas using VAST on the WCGTBS for years 2003-2015:
 
 1.	WCGTBS data<br>
-    a.	Since not all Petrale sole are aged, length at age information was looked at to determine what lengths best represented young Petrale. (Table and Fig)<br>
+    a.	Since not all Petrale sole are aged, length at age information was looked at to determine what lengths best represented young Petrale. <br>
     b.	Tow locations were used to determine how quickly juveniles spread out along the coast, as they grew longer.<br>
     c.	Data of the very smallest Petrale was minimal.<br>
     d.	Petrale sole less than or equal to 18 cm was determined to have enough survey data to identify presence in coastal areas, but not too old to have spread along the entire coast.<br>
@@ -48,7 +48,7 @@ c.	The R function ‘polyoffset’ in the package, ‘polyclip’ (Ref) was used
 d.	The polygons were created to be outside of a group of VAST areas by half the distance between grid points (~1 nm).<br>
 e.	The raw data as bubbles (CPUE proportion to the circle area), VAST areas, and surrounding polygons were plotted using ‘plotGIS’ in the package ‘Imap’ (Ref) for the underlying GIS figure.<br>
 f.	Keeping in mind the sparse of the juvenile Petrale data, the following objective rules were applied when defining the groups of VAST areas:<br>
-i.	If there was at least one catch of juvenile Petrale sole (a raw data bubble) per 25 km, with all points lying between the same bathymetric curves, then these groups and the catch of juvenile Petrale were contained within a single polygon. The distance spanned between two groups, not occupied with other groups, within a single polygon was less than 35 km.<br>
-ii.	If, however, the group of VAST areas (perhaps only a single area) was on a seamount, then this group has its own polygon.<br>
-iii.	If one or more survey catches of juvenile Petrale sole was closely associated with a group then the polygon was extended to include at least the center of the raw data bubble (the center of bubble defines the location of tow, the size of the area of the bubble only shows the amount of CPUE).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.	If there was at least one catch of juvenile Petrale sole (a raw data bubble) per 25 km, with all points lying between the same bathymetric curves, then these groups and the catch of juvenile Petrale were contained within a single polygon. The distance spanned between two groups, not occupied with other groups, within a single polygon was less than 35 km.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ii.	If, however, the group of VAST areas (perhaps only a single area) was on a seamount, then this group has its own polygon.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iii. If one or more survey catches of juvenile Petrale sole was closely associated with a group then the polygon was extended to include at least the center of the raw data bubble (the center of bubble defines the location of tow, the size of the area of the bubble only shows the amount of CPUE).<br>
 
