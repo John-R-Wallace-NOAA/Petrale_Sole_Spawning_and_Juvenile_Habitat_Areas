@@ -1,6 +1,6 @@
 See [Length_Restricted_Catch_with_VAST](https://github.com/John-R-Wallace-NOAA/Length_Restricted_Catch_with_VAST)
 
-Finding juvenile Petrale sole areas using VAST on the WCGTBS for years 2003-15
+Finding juvenile Petrale sole areas using VAST on the WCGTBS for years 2003-15:
 
 1.	WCGTBS data<br>
     a.	Since not all Petrale sole are aged, length at age information was looked at to determine what lengths best represented young Petrale. (Table and Fig)<br>
