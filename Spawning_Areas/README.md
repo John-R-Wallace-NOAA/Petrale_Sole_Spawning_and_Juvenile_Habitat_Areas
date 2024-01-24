@@ -9,7 +9,7 @@ Steps used:
 
        VAST Petrale CW NOCV Biomass Other Regions n_x = 300.R
 <br><br>
-3\. The raw data (DatG) was compared with VAST grid results using bubble plots and areas with the highest catch in the Petrale Winter Fishery were found:
+3\. The raw data (DatG) was compared for consistence with VAST grid results using bubble plots and areas with the highest catch in the Petrale Winter Fishery were found:
 
        Find VAST Areas with Highest Petrale Winter Fishing Catch.R
 
