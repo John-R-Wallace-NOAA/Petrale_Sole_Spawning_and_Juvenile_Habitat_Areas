@@ -10,7 +10,7 @@ Steps used:
        VAST Petrale CW NOCV Biomass Other Regions n_x = 300.R
 As of Jan 2024, not all of the tar ball installs (which need compiling) are working for me with Windows R ver 3.5.1, hence <br> *** ONLY MY LEGACY COMPLIED VERSIONS HAVE ALLOWED ME TO STILL MAKE THIS WORK ***       
 <br><br>
-3\. The raw data (DatG) was compared for consistence with VAST grid results using bubble plots and areas with the highest catch in the Petrale Winter Fishery were found:
+3\. The raw data (DatG) was compared for consistence with VAST grid results using bubble plots and areas with the highest catch in the Petrale Winter Fishery were found using:
 
        Find VAST Areas with Highest Petrale Winter Fishing Catch.R
 
